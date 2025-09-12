@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amicta Solle | Oraculista de Luxo</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cormorant Garamond for titles, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Animate on Scroll (AOS) Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- Main Luxury Theme Styles --- */
+        :root {
+            --color-dark-purple: #10061e;
+            --color-purple: #4c2a85;
+            --color-lilac: #a482d9;
+            --color-blue-glow: #6a95f7;
+            --color-gold: #e6c58a;
+
+            /* --- Tarot Card Specific Colors --- */
+            --card-light-purple: #e2a9e5;
+            --card-medium-purple: #632c65;
+            --card-dark-purple: #4b384c;
+            --card-gold: #ffd85b;
+            --card-white: #fff;
+        }
+
+        body {
+            background-color: var(--color-dark-purple);
+            color: #f0e6ff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .font-title {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* --- Advanced Parallax Hero Section --- */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            will-change: transform;
+        }
+
+        #hero-bg { 
+            background-image: linear-gradient(180deg, rgba(16, 6, 30, 0.7) 0%, var(--color-dark-purple) 100%), url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop&ixlib-rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            z-index: 1;
+        }
+        #hero-stars {
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            z-index: 2;
+        }
+         #hero-glow {
+            background-image: radial-gradient(circle, rgba(106, 149, 247, 0.15) 0%, rgba(16, 6, 30, 0) 60%);
+            z-index: 3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Angled Section Separator */
+        .angled-section {
+            position: relative;
+            background-color: var(--color-dark-purple);
+        }
+        .angled-section::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom right, var(--color-dark-purple) 50%, transparent 50%);
+        }
+        
+        .btn-premium {
+            background: linear-gradient(135deg, var(--color-lilac), var(--color-purple));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(164, 130, 217, 0.3), 0 0 15px rgba(164, 130, 217, 0.2) inset;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+        .btn-premium:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(164, 130, 217, 0.5), 0 0 20px rgba(164, 130, 217, 0.3) inset;
+            animation-play-state: paused;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 4px 20px rgba(164, 130, 217, 0.3), 0 0 15px rgba(164, 130, 217, 0.2) inset; }
+            50% { box-shadow: 0 6px 25px rgba(106, 149, 247, 0.4), 0 0 20px rgba(106, 149, 247, 0.3) inset; }
+        }
+        
+        .testimonial-card {
+            background: transparent;
+            border: 1px solid rgba(230, 197, 138, 0.3);
+            border-radius: 1rem;
+        }
+        
+        .gold-text {
+            color: var(--color-gold);
+            text-shadow: 0 0 10px rgba(230, 197, 138, 0.3);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 8px var(--color-blue-glow), 0 0 12px var(--color-blue-glow), 0 0 20px var(--color-purple);
+        }
+        
+        /* --- TAROT CARD STYLES --- */
+        .tarot-card-wrap {
+            width: 300px;
+            height: 500px;
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .tarot-card {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 10px;
+            height: 100%;
+            position: absolute;
+            transition: transform 1s cubic-bezier(.5, .59, .44, 1.11);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tarot-card.front {
+            background-color: var(--card-medium-purple);
+            background-image: repeating-linear-gradient( -45deg, var(--card-medium-purple), var(--card-medium-purple) 10px, #612b63 10px, #612b63 20px );
+            border: 20px solid var(--card-white);
+            transform-origin: center;
+        }
+
+        .tarot-card.back {
+            background-color: var(--card-dark-purple);
+            background-image: radial-gradient(ellipse at center, #604862 0%, var(--card-dark-purple) 100%);
+            border: 20px solid rgba(255, 255, 255, .9);
+            transform: rotateY(-180deg);
+            z-index: 1;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tarot-card-wrap:hover .tarot-card.front,
+        .tarot-card-wrap.is-flipped .tarot-card.front {
+            transform: rotateY(180deg);
+        }
+
+        .tarot-card-wrap:hover .tarot-card.back,
+        .tarot-card-wrap.is-flipped .tarot-card.back {
+            transform: rotateY(0deg);
+        }
+
+        .insignia {
+            height: 200px;
+            width: 200px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .insignia .wands {
+            background: var(--card-gold);
+            height: 200px;
+            left: 50%;
+            position: absolute;
+            transform: rotate(45deg) translateX(-50%);
+            transform-origin: left;
+            width: 5px;
+        }
+
+        .insignia .swords {
+            background: var(--card-gold);
+            height: 200px;
+            left: 50%;
+            position: absolute;
+            transform: rotate(-45deg) translateX(-50%);
+            transform-origin: left;
+            width: 5px;
+        }
+        
+        .insignia .swords::after {
+            background: var(--card-gold);
+            bottom: 25%;
+            content: '';
+            height: 5px;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%);
+            width: 30px;
+        }
+
+        .insignia .pentacles {
+            border: 5px solid var(--card-gold);
+            border-radius: 100%;
+            bottom: -20px;
+            height: 40px;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%);
+            width: 40px;
+        }
+        
+        .insignia .cups {
+            border: 5px solid var(--card-gold);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            border-top: 0;
+            height: 40px;
+            left: 50%;
+            position: absolute;
+            top: -20px;
+            transform: translateX(-50%);
+            width: 40px;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="header">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="font-title text-3xl text-white tracking-widest" style="text-shadow: 0 0 10px rgba(255,255,255,0.3);">
+                    Amicta Solle
+                </div>
+                <nav class="hidden md:flex items-center space-x-8 text-lg">
+                    <a href="#sobre" class="text-gray-300 hover:text-white transition-colors duration-300">Sobre</a>
+                    <a href="#servicos" class="text-gray-300 hover:text-white transition-colors duration-300">Serviços</a>
+                    <a href="#depoimentos" class="text-gray-300 hover:text-white transition-colors duration-300">Depoimentos</a>
+                    <a href="https://wa.me/5521986212507" target="_blank" rel="noopener noreferrer" class="text-white bg-white/10 px-6 py-2 rounded-full hover:bg-white/20 backdrop-blur-sm transition-all duration-300">Agendar</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-purple/90 backdrop-blur-lg">
+             <a href="#sobre" class="block text-center text-lg py-3 text-gray-300 hover:text-white transition-colors duration-300">Sobre</a>
+            <a href="#servicos" class="block text-center text-lg py-3 text-gray-300 hover:text-white transition-colors duration-300">Serviços</a>
+            <a href="#depoimentos" class="block text-center text-lg py-3 text-gray-300 hover:text-white transition-colors duration-300">Depoimentos</a>
+            <a href="https://wa.me/5521986212507" target="_blank" rel="noopener noreferrer" class="block text-center text-lg py-4 text-white font-semibold">Agendar Consulta</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div id="hero-bg" class="parallax-layer"></div>
+        <div id="hero-stars" class="parallax-layer"></div>
+        <div id="hero-glow" class="parallax-layer"></div>
+        <div class="hero-content px-4">
+            <h1 class="text-5xl md:text-8xl font-title text-white leading-tight drop-shadow-2xl" data-aos="fade-up">
+                Amicta Solle
+            </h1>
+            <p class="mt-4 text-xl md:text-3xl font-light text-lilac text-glow" data-aos="fade-up" data-aos-delay="200">
+                Desvende os segredos que o destino reserva para você.
+            </p>
+            <a href="https://wa.me/5521986212507" target="_blank" rel="noopener noreferrer" class="mt-12 inline-block btn-premium" data-aos="fade-up" data-aos-delay="400">
+                Inicie Sua Jornada
+            </a>
+        </div>
+    </section>
+    
+    <div class="angled-section">
+    <!-- About Section -->
+    <section id="sobre" class="py-20 md:py-32">
+        <div class="container mx-auto px-6 max-w-4xl text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-title gold-text mb-6" data-aos="fade-up">A Guardiã dos Seus Caminhos</h2>
+            <div class="w-24 h-px bg-gold mx-auto mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                Com a sabedoria ancestral das estrelas e o poder intuitivo das cartas, Amicta Solle não apenas lê o futuro, ela ilumina o presente. Cada consulta é um ritual sagrado, um portal para o autoconhecimento e a clareza, guiando você com exclusividade e sigilo absoluto através das encruzilhadas da vida.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section with Tarot Cards -->
+    <section id="servicos" class="py-20 md:py-32">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-title text-white mb-4" data-aos="fade-up">O Oráculo Revela</h2>
+                <p class="text-lg text-lilac max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Role a página para descobrir os serviços exclusivos.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-y-24 gap-x-16 justify-center max-w-6xl mx-auto">
+                <!-- Card 1: Tarot -->
+                <div class="tarot-card-wrap mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tarot-card front">
+                        <div class="insignia">
+                          <div class="wands"></div>
+                          <div class="swords"></div>
+                          <div class="pentacles"></div>
+                          <div class="cups"></div>
+                        </div>
+                    </div>
+                    <div class="tarot-card back">
+                        <h3 class="font-title text-3xl text-card-light-purple mb-4">Leitura de Tarot Completa</h3>
+                        <p class="text-card-white/80">Uma análise profunda de suas energias, desafios e oportunidades, revelando caminhos e potenciais futuros.</p>
+                    </div>
+                </div>
+                <!-- Card 2: Astrology -->
+                <div class="tarot-card-wrap mx-auto" data-aos="fade-up" data-aos-delay="300">
+                    <div class="tarot-card front">
+                        <div class="insignia">
+                          <div class="wands"></div>
+                          <div class="swords"></div>
+                          <div class="pentacles"></div>
+                          <div class="cups"></div>
+                        </div>
+                    </div>
+                    <div class="tarot-card back">
+                        <h3 class="font-title text-3xl text-card-light-purple mb-4">Mapa Astral Pessoal</h3>
+                        <p class="text-card-white/80">Descubra a arquitetura cósmica do seu ser. Uma interpretação detalhada do seu mapa de nascimento.</p>
+                    </div>
+                </div>
+                <!-- Card 3: Oracle -->
+                <div class="tarot-card-wrap mx-auto" data-aos="fade-up" data-aos-delay="400">
+                    <div class="tarot-card front">
+                        <div class="insignia">
+                          <div class="wands"></div>
+                          <div class="swords"></div>
+                          <div class="pentacles"></div>
+                          <div class="cups"></div>
+                        </div>
+                    </div>
+                    <div class="tarot-card back">
+                        <h3 class="font-title text-3xl text-card-light-purple mb-4">Consulta de Oráculo</h3>
+                        <p class="text-card-white/80">Uma sessão focada em questões específicas, buscando respostas diretas e conselhos práticos dos oráculos.</p>
+                    </div>
+                </div>
+                <!-- Card 4: Chave da Travessia -->
+                <div class="tarot-card-wrap mx-auto" data-aos="fade-up" data-aos-delay="500">
+                    <div class="tarot-card front">
+                        <div class="insignia">
+                          <div class="wands"></div>
+                          <div class="swords"></div>
+                          <div class="pentacles"></div>
+                          <div class="cups"></div>
+                        </div>
+                    </div>
+                    <div class="tarot-card back">
+                        <h3 class="font-title text-3xl text-card-light-purple mb-4">Chave da Travessia</h3>
+                        <p class="text-card-white/80 text-sm leading-relaxed">
+                            Um ritual que abre portas para a alma. Combinando astrologia, tarot, numerologia e apometria, cada sessão é uma travessia para transformar dúvidas em clareza, bloqueios em aprendizado e incertezas em direção, alinhando-se com a sua própria força de transformação.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="depoimentos" class="py-20 md:py-32">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-title gold-text mb-4" data-aos="fade-up">Vozes do Destino</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Palavras de quem teve seu caminho iluminado.</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="testimonial-card p-8" data-aos="fade-right">
+                    <p class="text-gray-300 italic mb-6">"A consulta com Amicta foi um divisor de águas. Encontrei clareza e paz que não sentia há anos. Uma profissional de sensibilidade ímpar."</p>
+                    <p class="text-right font-semibold gold-text">- Marina R.</p>
+                </div>
+                 <div class="testimonial-card p-8" data-aos="fade-left">
+                    <p class="text-gray-300 italic mb-6">"Precisão, elegância e uma profundidade impressionante. Amicta não é apenas uma cartomante, é uma verdadeira guia espiritual. Recomendo a todos."</p>
+                    <p class="text-right font-semibold gold-text">- Ricardo L.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contato" class="py-20 md:py-32">
+        <div class="container mx-auto px-6 text-center relative z-10">
+             <h2 class="text-4xl md:text-5xl font-title text-white mb-4" data-aos="fade-up">Está pronto para a sua revelação?</h2>
+            <p class="text-lg text-lilac max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">
+                O universo tem mensagens para você. Agende sua consulta exclusiva e permita que os véus do mistério se abram.
+            </p>
+            <a href="https://wa.me/5521986212507" target="_blank" rel="noopener noreferrer" class="btn-premium" data-aos="fade-up" data-aos-delay="200">
+                Agendar Consulta Exclusiva
+            </a>
+        </div>
+    </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-black/20 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p class="font-title text-2xl text-white mb-2">Amicta Solle</p>
+            <p class="mb-4">Consultas sigilosas e exclusivas.</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="hover:text-lilac transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                <a href="#" class="hover:text-lilac transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.795 2.013 10.148 2 12.315 2zm-1.161 1.043c-1.049.048-1.696.208-2.227.42a3.917 3.917 0 00-1.417.923A3.917 3.917 0 003.58 6.027c-.212.531-.372 1.178-.42 2.227-.048 1.021-.06 1.353-.06 3.737s.012 2.716.06 3.737c.048 1.049.208 1.696.42 2.227a3.917 3.917 0 00.923 1.417 3.917 3.917 0 001.417.923c.531.212 1.178.372 2.227.42 1.021.048 1.353.06 3.737.06s2.716-.012 3.737-.06c1.049-.048 1.696.208-2.227-.42a3.917 3.917 0 001.417-.923 3.917 3.917 0 00.923-1.417c.212-.531.372-1.178.42-2.227.048-1.021.06-1.353.06-3.737s-.012-2.716-.06-3.737c-.048-1.049-.208-1.696-.42-2.227a3.917 3.917 0 00-.923-1.417A3.917 3.917 0 0018.43 3.464c-.531-.212-1.178-.372-2.227-.42-1.021-.048-1.353-.06-3.737-.06s-2.716.012-3.737.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 1.44a3.695 3.695 0 110 7.39 3.695 3.695 0 010-7.39zm5.232-4.23a1.21 1.21 0 100 2.42 1.21 1.21 0 000-2.42z" clip-rule="evenodd" /></svg></a>
+                <a href="#" class="hover:text-lilac transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+            </div>
+            <p>&copy; 2024 Amicta Solle. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animate on Scroll
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+
+        // Advanced Parallax Effect
+        window.addEventListener('scroll', function() {
+            const scrollValue = window.scrollY;
+            
+            document.getElementById('hero-bg').style.transform = `translateY(${scrollValue * 0.5}px)`;
+            document.getElementById('hero-stars').style.transform = `translateY(${scrollValue * 0.3}px)`;
+            document.getElementById('hero-glow').style.transform = `translateY(${scrollValue * 0.7}px) scale(${1 + scrollValue * 0.0005})`;
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrollValue * 0.4}px)`;
+                heroContent.style.opacity = 1 - scrollValue / 600;
+            }
+        });
+
+        // Header background on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('bg-dark-purple/90', 'backdrop-blur-lg', 'shadow-lg');
+            } else {
+                header.classList.remove('bg-dark-purple/90', 'backdrop-blur-lg', 'shadow-lg');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+        
+        // Flip cards on scroll for mobile-friendly interaction
+        const cards = document.querySelectorAll('.tarot-card-wrap');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-flipped');
+                    // Optional: stop observing once it has flipped
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.6 // Card flips when 60% is visible
+        });
+
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+
+    </script>
+</body>
+</html>
+
